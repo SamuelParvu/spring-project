@@ -1,15 +1,21 @@
 package ro.itschool.project.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ro.itschool.project.models.User;
+import sendinblue.ApiClient;
+import sendinblue.Configuration;
+import sendinblue.auth.ApiKeyAuth;
+import sibModel.SendSmtpEmailSender;
+import sibModel.SendSmtpEmailTo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.regex.Pattern;
+
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService{
 
     List<User> userList = new ArrayList<>();
@@ -30,6 +36,24 @@ public class UserServiceImpl implements UserService{
         userList.add(user);
 
         // TODO send an email to the user
+
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+        apiKey.setApiKey("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");
+        try {
+            SendSmtpEmailSender sender = new SendSmtpEmailSender();
+            sender.setEmail("sender@example.com");
+            sender.setName("John Doe");
+
+            List<SendSmtpEmailTo> toList = new ArrayList<SendSmtpEmailTo>();
+            SendSmtpEmailTo to = new SendSmtpEmailTo();
+            to.setEmail("example@example.com");
+            to.setName("John Doe");
+            toList.add(to);
+
+        } catch (Exception e){
+            log.error("Exception occurred:- " + e.getMessage());
+        }
 
         return user;
     }
