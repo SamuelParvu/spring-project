@@ -1,4 +1,4 @@
-package ro.itschool.project.ses20hw.models;
+package ro.itschool.project.models;
 
 import lombok.Data;
 
@@ -8,5 +8,5 @@ import java.util.Set;
 public class Recipe {
 
     private Set<String> ingredientSet;
-    private DishType dishType;
+    private DishTypeEnum dishTypeEnum;
 }
