@@ -1,11 +1,11 @@
-package ro.itschool.project.models;
+package ro.itschool.project.models.entities;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class User {
+public class Client {
 
     long id;
     String firstName;

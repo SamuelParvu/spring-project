@@ -7,7 +7,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ro.itschool.project.models.Weather;
+import ro.itschool.project.models.entities.Weather;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

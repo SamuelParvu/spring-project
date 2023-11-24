@@ -2,7 +2,7 @@ package ro.itschool.project.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ro.itschool.project.models.User;
+import ro.itschool.project.models.entities.Client;
 import sendinblue.ApiClient;
 import sendinblue.Configuration;
 import sendinblue.auth.ApiKeyAuth;
@@ -16,24 +16,24 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class ClientServiceImpl implements ClientService {
 
-    List<User> userList = new ArrayList<>();
+    List<Client> clientList = new ArrayList<>();
 
     @Override
-    public User createUser(String firstName, String lastName, String email) {
+    public Client createUser(String firstName, String lastName, String email) {
         if (!validName(firstName) || !validName(lastName) || !validEmail(email)){
             throw new IllegalArgumentException("one of the fields are invalid");
         }
-        User user = new User();
-        long userId = userList.isEmpty() ? 0 : userList.get(userList.size()-1).getId()+1;
+        Client client = new Client();
+        long userId = clientList.isEmpty() ? 0 : clientList.get(clientList.size()-1).getId()+1;
         // note using just: userId = userList.size()+1 breaks easily when removing any element apart from the last one
-        user.setId(userId);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setCreationTime(LocalDateTime.now());
-        userList.add(user);
+        client.setId(userId);
+        client.setFirstName(firstName);
+        client.setLastName(lastName);
+        client.setEmail(email);
+        client.setCreationTime(LocalDateTime.now());
+        clientList.add(client);
 
         // TODO send an email to the user
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService{
             log.error("Exception occurred:- " + e.getMessage());
         }
 
-        return user;
+        return client;
     }
 
     boolean validName(String name){
@@ -67,8 +67,8 @@ public class UserServiceImpl implements UserService{
 
     // could use a map/tree instead will be faster
     @Override
-    public User getUser(long id) {
-        return userList.stream().
+    public Client getUser(long id) {
+        return clientList.stream().
                 filter( e -> e.getId() == id)
                 .findFirst().orElse(null);
     }

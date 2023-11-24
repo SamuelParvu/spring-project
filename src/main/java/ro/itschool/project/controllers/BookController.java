@@ -1,12 +1,10 @@
 package ro.itschool.project.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ro.itschool.project.models.Book;
+import ro.itschool.project.models.entities.Book;
 import ro.itschool.project.services.BookService;
 
-import javax.crypto.interfaces.PBEKey;
 import java.util.List;
 
 @RestController

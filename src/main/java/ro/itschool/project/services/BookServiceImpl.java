@@ -2,7 +2,7 @@ package ro.itschool.project.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ro.itschool.project.models.Book;
+import ro.itschool.project.models.entities.Book;
 
 import java.util.ArrayList;
 import java.util.List;
